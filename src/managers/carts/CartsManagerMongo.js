@@ -6,7 +6,7 @@ class CartManager {
             const carts = await cartsModel.find({})
             return carts
         } catch (error) {
-            return error
+            throw error
         }
     }
     async getCartsById(id){
@@ -14,7 +14,7 @@ class CartManager {
             const cart = await cartsModel.findById(id)
             return cart
         } catch (error) {
-            return error
+            throw error
         }
     }
     async createCart(){
@@ -22,7 +22,7 @@ class CartManager {
             const newCart = await cartsModel.create()
             return newCart
         } catch (error) {
-            return error
+            throw error
         }
         
 

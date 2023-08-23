@@ -70,7 +70,7 @@ router.get('/', async(req,res)=>{
             res.status(200).json({message:'No products found'})
         }
     } catch (error) {
-        res.status(500).json({error})
+        throw res.status(500).json({error})
     }
 })
 
@@ -84,12 +84,12 @@ router.get('/:id',async(req,res)=>{
             res.status(200).json({message: 'Product found', product})
         }
     } catch (error) {
-        res.status(500).json({error})
+        throw res.status(500).json({error})
     }
 })
 
 router.post('/',async(req,res)=>{
-    const {title, description ,price, code, category} = req.body
+    const {title, description , price, code, category} = req.body
     if(
         !title ||
         !description ||
@@ -97,15 +97,39 @@ router.post('/',async(req,res)=>{
         !code ||
         !category
     ){
-        return res.status(400).json({message: 'Some data is missing'})
+        return res.status(400).json({message: 'Some data is missing'});
     }
     try {
-        const newProduct = await productManager.createProduct(req.body)
-        res.status(200).json({message: 'New Product', newProduct})
+        const newProduct = await productManager.createProduct(req.body);
+        res.status(200).json({message: 'New Product', newProduct});
     } catch (error) {
-        res.status(500).json({error})
+        throw res.status(500).json({error});
     }
 })
+
+/* router.post("/", async (req, res) => {
+
+    const { title, description, price, code, category } = req.body;
+    
+    if (!title || !description || !price || !code || !category) {
+    
+    return res.status(400).json({ message: "Some data is missing" });
+    
+    }
+    
+    try {
+    
+    const newProduct = await productManager.createProduct(req.body);
+    
+    res.status(200).json({ message: "New Product", newProduct });
+    
+    } catch (error) {
+    
+    throw error;
+    
+    }
+    
+    }); */
 
 router.delete('/:id',async(req,res)=>{
     const {id} = req.params
@@ -113,7 +137,7 @@ router.delete('/:id',async(req,res)=>{
         const deleteProduct = await productManager.deleteProduct(id)
         res.status(200).json({message: 'Product deleted', product: deleteProduct})
     } catch (error) {
-        res.status(500).json({error})
+        throw res.status(500).json({error})
     }
 })
 

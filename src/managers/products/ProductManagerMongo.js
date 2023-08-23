@@ -6,7 +6,7 @@ class ProductManager {
             const products = await productsModel.find({})
             return products
         } catch (error) {
-            return error
+            throw error
         }
     }
     async createProduct(obj){
@@ -14,7 +14,7 @@ class ProductManager {
             const newProduct = await productsModel.create(obj)
             return newProduct
         } catch (error) {
-            return error
+            throw error
         }
     }
     async getProductById(id){
@@ -22,7 +22,7 @@ class ProductManager {
             const product = await productsModel.findById(id)
             return product
         } catch (error) {
-            return error
+            throw error
         }
     }
     async updateOne(id,obj){
@@ -30,7 +30,7 @@ class ProductManager {
             const UpdateProduct = await productsModel.updateOne({_id:id},{...obj})
             return UpdateProduct
         } catch (error) {
-            return error
+            throw error
         }
     }
     async deleteProduct(id){
@@ -38,7 +38,7 @@ class ProductManager {
             const deleteProduct = await productsModel.findByIdAndDelete(id)
             return deleteProduct
         } catch (error) {
-            return error
+            throw error
         }
     }
 }

@@ -4,7 +4,7 @@ const productsSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     description: {
         type: String,
@@ -12,7 +12,7 @@ const productsSchema = new mongoose.Schema({
     },
     price: {
         type: Number,
-        required: true
+        required: true,
     },
     thumbnail: {
         type: Object,
@@ -20,23 +20,99 @@ const productsSchema = new mongoose.Schema({
     code: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     stock: {
         type: Number,
-        required: true,
-        default: 0
+        default: 0,
     },
     status: {
         type: Boolean,
-        required: true,
         default: true,
     },
     category: {
         type: String,
         required: true,
-    }
-})
+    },
+});
 
-export const productsModel = mongoose.model('Products', productsSchema)
+export const productsModel = mongoose.model('products', productsSchema)
 
+
+/* import mongoose from "mongoose";
+
+const productsSchema = new mongoose.Schema({
+
+title: {
+
+type: String,
+
+required: true,
+
+unique: true,
+
+},
+
+description: {
+
+type: String,
+
+required: true,
+
+},
+
+price: {
+
+type: Number,
+
+required: true,
+
+},
+
+thumbnail: {
+
+type: Object,
+
+},
+
+code: {
+
+type: String,
+
+required: true,
+
+unique: true,
+
+},
+
+stock: {
+
+type: Number,
+
+default: 0,
+
+},
+
+status: {
+
+type: Boolean,
+
+required: false,
+
+default: true,
+
+},
+
+category: {
+
+type: String,
+
+required: true,
+
+},
+
+});
+
+export const productsModel = mongoose.model("products", productsSchema);
+
+ */
