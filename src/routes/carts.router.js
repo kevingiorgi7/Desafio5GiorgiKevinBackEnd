@@ -78,7 +78,7 @@ router.get('/', async(req,res)=>{
             res.status(200).json({message:'No carts found'})
         }
     } catch (error) {
-        throw res.status(500).json({error})
+        res.status(500).json({error})
     }
 })
 
@@ -92,7 +92,7 @@ router.get('/:id',async(req,res)=>{
             res.status(200).json({message: 'Cart found', cart})
         }
     } catch (error) {
-        throw res.status(500).json({error})
+        res.status(500).json({error})
     }
 })
 
@@ -101,12 +101,19 @@ router.post('/',async(req,res)=>{
         const newCart = await cartManager.createCart()
         res.status(200).json({message: 'New Cart', newCart})
     } catch (error) {
-        throw res.status(500).json({error})
+        res.status(500).json({error})
     }
 })
 
-
-
+router.post('/:cid/products/:pid',async(req,res)=>{
+    const {cid,pid} = req.params
+    try {
+        const productAdded = await cartManager.addProduct(+cid,+pid)
+        res.status(200).json({message: 'Products Added', productAdded})
+    } catch (error) {
+        res.status(500).json({error})
+    }
+})
 
 
 

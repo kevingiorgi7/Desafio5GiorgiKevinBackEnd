@@ -20,6 +20,7 @@ class ProductManager {
     async getProductById(id){
         try {
             const product = await productsModel.findById(id)
+            if(!product){return {"ERROR":`El Producto con ID ${id} no existe o no es un número`}}
             return product
         } catch (error) {
             throw error
