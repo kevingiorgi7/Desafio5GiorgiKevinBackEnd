@@ -20,6 +20,14 @@ class CartManager {
             throw error
         }
     }
+    async saveCart(cart) {
+        try {
+            await cart.save();
+            console.log('Se guardó el carrito');
+        } catch (error) {
+            throw error;
+        }
+    }
     async createCart(){
         try {
             //const newCart = await cartsModel.create()
@@ -32,10 +40,21 @@ class CartManager {
         }
     }
     async addProduct(cid, pid){
-        try {
             const cart = await cartsModel.findById(cid)
             const product = await productManager.getProductById(pid)
-            return cart, console.log(cart), console.log(product);
+            if(!product){return {"ERROR":`El Producto con ID ${pid} no existe o no es un número`}}
+            const cartIndex = cart.products.findIndex(e=>e.productID===pid)
+            if(cartIndex===-1){ //si en findindex no encuentra nada, arroja -1
+                cart.products.push({
+                    productID: pid,
+                    quantity: 1
+                })
+            } else {
+                cart.products[cartIndex].quantity++
+            } 
+        try {    
+            await this.saveCart(cart)
+            return cart, console.log(cartIndex), console.log(cid), console.log(pid), console.log(cart), console.log(product);
         } catch (error) {
             throw error
         }

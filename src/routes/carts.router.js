@@ -108,13 +108,11 @@ router.post('/',async(req,res)=>{
 router.post('/:cid/products/:pid',async(req,res)=>{
     const {cid,pid} = req.params
     try {
-        const productAdded = await cartManager.addProduct(+cid,+pid)
-        res.status(200).json({message: 'Products Added', productAdded})
+        const addProduct = await cartManager.addProduct(cid,pid)
+        res.status(200).json({message:'Producto agregado', product: addProduct})
     } catch (error) {
         res.status(500).json({error})
     }
 })
-
-
 
 export default router
